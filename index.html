@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnific Kling V3 Motion Control - Web App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Magnific Kling V3 Motion Control</h1>
+            <p class="subtitle">Generate Motion Videos from Images & Reference Videos</p>
+        </header>
+
+        <div class="config-section">
+            <div class="form-group">
+                <label for="apiKey">API Key Magnific:</label>
+                <input type="password" id="apiKey" placeholder="Masukkan API Key Anda" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="tier">Mode:</label>
+                <select id="tier">
+                    <option value="std">Standard (720p) - Lebih Hemat</option>
+                    <option value="pro">Pro (1080p) - Kualitas Tinggi</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-box">
+                <h3>🖼️ Upload Gambar Referensi</h3>
+                <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png" multiple>
+                <div class="file-info">
+                    <small>Format: JPG, JPEG, PNG | Max: 10MB per file</small>
+                </div>
+                <div id="imagePreview" class="preview-container"></div>
+            </div>
+
+            <div class="upload-box">
+                <h3>🎬 Upload Video Referensi</h3>
+                <input type="file" id="videoInput" accept="video/mp4,video/mov" multiple>
+                <div class="file-info">
+                    <small>Format: MP4, MOV | Max: 100MB per file</small>
+                </div>
+                <div id="videoPreview" class="preview-container"></div>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <button id="generateBtn" class="btn-primary" disabled>
+                <span class="btn-text">Generate Motion Videos</span>
+            </button>
+            <div class="info-text">
+                <small>Upload minimal 1 gambar dan 1 video untuk memulai</small>
+            </div>
+        </div>
+
+        <div id="progressSection" class="progress-section" style="display: none;">
+            <h3>Progress Generasi</h3>
+            <div id="progressContainer"></div>
+        </div>
+
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <h3>Hasil Generasi</h3>
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Memproses...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

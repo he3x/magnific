@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Magnific Kling V3 - AI Motion Video Generator">
+    <meta name="theme-color" content="#6366f1">
+    <title>Magnific Kling V3 - AI Motion Video Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">Magnific Kling V3</span>
+            </div>
+            <h1 class="hero-title">AI Motion Video Generator</h1>
+            <p class="hero-subtitle">Transform static images into dynamic videos with AI-powered motion control</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Configuration Card -->
+        <div class="card config-card">
+            <div class="card-header">
+                <h2 class="card-title">⚙️ Configuration</h2>
+                <p class="card-subtitle">Set up your API keys and preferences</p>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">API Key</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="apiKey" 
+                        class="form-input" 
+                        placeholder="Enter your Magnific API key"
+                    >
+                    <p class="form-hint">💡 Get your API key from Magnific AI dashboard</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Quality Mode</span>
+                    </label>
+                    <select id="tier" class="form-select">
+                        <option value="std">Standard (720p) - Faster & Cost-effective</option>
+                        <option value="pro">Pro (1080p) - Premium Quality</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Upload Section -->
+        <div class="upload-grid">
+            <!-- Image Upload Card -->
+            <div class="card upload-card">
+                <div class="card-header">
+                    <h2 class="card-title">🖼️ Reference Image</h2>
+                    <p class="card-subtitle">Upload your source image</p>
+                </div>
+                <div class="card-body">
+                    <div class="upload-area">
+                        <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png" multiple hidden>
+                        <label for="imageInput" class="upload-trigger">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">
+                                <span class="upload-title">Click to upload</span>
+                                <span class="upload-subtitle">JPG, PNG • Max 10MB</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div id="imagePreview" class="preview-grid"></div>
+                </div>
+            </div>
+
+            <!-- Video Upload Card -->
+            <div class="card upload-card">
+                <div class="card-header">
+                    <h2 class="card-title">🎥 Reference Video</h2>
+                    <p class="card-subtitle">Upload or download from TikTok</p>
+                </div>
+                <div class="card-body">
+                    <!-- Tab Navigation -->
+                    <div class="tab-nav">
+                        <button class="tab-btn active" data-tab="upload">
+                            <span class="tab-icon">📁</span>
+                            <span class="tab-text">Upload</span>
+                        </button>
+                        <button class="tab-btn" data-tab="tiktok">
+                            <span class="tab-icon">🎵</span>
+                            <span class="tab-text">TikTok</span>
+                        </button>
+                    </div>
+
+                    <!-- Upload Tab Content -->
+                    <div id="uploadTab" class="tab-content active">
+                        <div class="upload-area">
+                            <input type="file" id="videoInput" accept="video/mp4,video/mov" multiple hidden>
+                            <label for="videoInput" class="upload-trigger">
+                                <div class="upload-icon">🎬</div>
+                                <div class="upload-text">
+                                    <span class="upload-title">Click to upload</span>
+                                    <span class="upload-subtitle">MP4, MOV • Max 100MB</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- TikTok Tab Content -->
+                    <div id="tiktokTab" class="tab-content">
+                        <div class="tiktok-input-wrapper">
+                            <input 
+                                type="text" 
+                                id="tiktokUrl" 
+                                class="tiktok-input" 
+                                placeholder="Paste TikTok URL here..."
+                            >
+                            <button id="downloadTiktokBtn" class="btn-tiktok">
+                                <span class="btn-icon">⬇️</span>
+                                <span class="btn-text">Download</span>
+                            </button>
+                        </div>
+                        <p class="form-hint">💡 Paste any TikTok video URL and click download</p>
+                    </div>
+
+                    <div id="videoPreview" class="preview-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="action-section">
+            <button id="generateBtn" class="btn-generate" disabled>
+                <span class="btn-icon">✨</span>
+                <span class="btn-text">Generate Motion Videos</span>
+                <span class="btn-arrow">→</span>
+            </button>
+            <p class="action-hint">Upload at least 1 image and 1 video to start</p>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progressSection" class="progress-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">⏳ Generation Progress</h2>
+            </div>
+            <div id="progressContainer" class="progress-container"></div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">✅ Generated Videos</h2>
+            </div>
+            <div id="resultsContainer" class="results-container"></div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Processing...</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Powered by Magnific AI • Kling V3 Motion Control</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
